@@ -1,5 +1,6 @@
 import { createServer } from "node:http";
-import { isFull } from "../../packages/booking-rules/index.js";
+import { isFull } from "@scheduler/booking-rules";
+
 
 const port = Number(process.env.PORT ?? 3000);
 

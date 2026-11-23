@@ -1,11 +1,13 @@
 {
+  "name": "scheduler",
   "private": true,
   "type": "module",
+  "workspaces": ["apps/*", "packages/*"],
   "scripts": {
-    "test": "node --test"
+    "test": "npm test --workspaces --if-present"
   },
-"engines": {
-  "node": ">=26 <27"
-},
-"packageManager": "npm@12.2.1"
+  "engines": {
+    "node": ">=26 <27"
+  },
+  "packageManager": "npm@12.2.1"
 }
