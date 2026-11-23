@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: help setup dev up down test logs reset-db
+.PHONY: help setup dev up down test logs reset-db doctor
 
 COMPOSE ?= docker compose 
 SERVICE ?= api
@@ -28,3 +28,11 @@ logs: ## Follow logs for SERVICE (default api)
 
 reset-db: ## Delete the database volume and reseed on next start
 	$(COMPOSE) down -v
+
+doctor: ## Check versions of Node, npm, Docker, Compose and Make
+	@node --version
+	@npm --version
+	@docker --version
+	@docker compose version
+	@make --version
+	@case "$$(node --version)" in v26*) ;; *) echo "Node v26 is required"; exit 1;; esac
