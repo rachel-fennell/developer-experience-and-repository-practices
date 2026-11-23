@@ -1,0 +1,44 @@
+services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: scheduler
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-scheduler-local-only}
+      POSTGRES_DB: scheduler
+    ports:
+      - "127.0.0.1:${DB_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql
+      - ./db/seed:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U scheduler -d scheduler"]
+      interval: 5s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    environment:
+      PORT: 3000
+      DATABASE_URL: postgres://scheduler:${DB_PASSWORD:-scheduler-local-only}@db:5432/scheduler
+    ports:
+      - "127.0.0.1:${API_PORT:-3000}:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    develop:
+      watch:
+        - action: sync
+          path: ./apps/api
+          target: /app/apps/api
+          ignore:
+            - node_modules/
+        - action: sync
+          path: ./packages
+          target: /app/packages
+        - action: rebuild
+          path: package-lock.json
+
+volumes:
+  pgdata:
