@@ -1,3 +1,5 @@
+// See docs/adr/0003-npm-workspaces-monorepo.md for why booking-rules is a workspace package
+
 import { createServer } from "node:http";
 import { isFull } from "@scheduler/booking-rules";
 
