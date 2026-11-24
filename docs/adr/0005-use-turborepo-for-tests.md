@@ -1,7 +1,7 @@
 # ADR 0005: Use Turborepo for workspace tests
 
 Date: 2026-11-19
-Status: Proposed
+Status: Acceptedß
 
 ## Context
 The scheduler has two workspaces. We can run their tests with npm or use Turborepo. 
@@ -19,3 +19,5 @@ We propose using Turborepo to run workspace tests. We will use its cache on our 
 3. Tests are quick now, so the time saved is small
 4. After code changes, tests still need to run again
 5. Will review this choice if the workspace tests in CI take mroe than 2 minutes for three main branches in a row
+
+Earlier note: ADR-003 NPM workspaces monorepo

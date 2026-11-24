@@ -1,7 +1,7 @@
 # ADR 0003: Keep the scheduler in one repository
 
 Date: 2026-11-17
-Status: Accepted
+Status: Superseded by ADR 0005
 
 ## Context
 API uses the booking-rules package. We could keep them in separate repos or keep them together in one. We could use npm on its own to run tasks or add a tool such as Turbo or Nx to reuse test results
