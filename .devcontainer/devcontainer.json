@@ -1,0 +1,9 @@
+{
+  "name": "scheduler",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:26",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "postCreateCommand": "npm ci --include=dev",
+  "forwardPorts": [3000, 5432]
+}
