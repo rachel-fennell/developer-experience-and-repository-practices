@@ -1,0 +1,14 @@
+# .github/workflows/bootstrap.yml
+name: bootstrap
+on: [pull_request]
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+      - uses: jdx/mise-action@v5
+      - run: make bootstrap
+      - run: curl --fail --retry 5 --retry-connrefused http://localhost:3000/health
+      - run: make test
